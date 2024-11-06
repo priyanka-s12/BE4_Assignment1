@@ -1,6 +1,7 @@
 const express = require('express');
 const { initializeDatabase } = require('./db/db.connect');
 const Book = require('./models/book.models');
+const cors = require('cors');
 // const fs = require('fs');
 
 const app = express();
@@ -9,6 +10,14 @@ app.listen(PORT, () => console.log('Server is running on port', PORT));
 
 app.use(express.json());
 initializeDatabase();
+
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 // const jsonData = fs.readFileSync('./books.json', 'utf-8');
 // const booksData = JSON.parse(jsonData);
